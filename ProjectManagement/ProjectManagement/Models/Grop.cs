@@ -5,7 +5,7 @@ using System.Web;
 
 namespace ProjectManagement.Models
 {
-    public class Grop
+    public class Groups
     {
         public int Team { get; set; }
         public string Developer { get; set; }
