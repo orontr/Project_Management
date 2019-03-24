@@ -1,8 +1,9 @@
-﻿@{
-    ViewBag.Title = "Contact";
-}
-<h2>@ViewBag.Title.</h2>
-<h3>@ViewBag.Message</h3>
+﻿@Code
+    ViewData("Title") = "Contact"
+End Code
+
+<h2>@ViewData("Title").</h2>
+<h3>@ViewData("Message")</h3>
 
 <address>
     One Microsoft Way<br />
