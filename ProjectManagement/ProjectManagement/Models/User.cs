@@ -8,7 +8,7 @@ namespace ProjectManagement.Models
 {
     public class User:UserLogin
     {
-        public int Team { get; set; }
+        public int Grp { get; set; }
         [RegularExpression("[C|D|M]$", ErrorMessage = "")]
         [StringLength(1, ErrorMessage = "")]
         public string Type { get; set; }
