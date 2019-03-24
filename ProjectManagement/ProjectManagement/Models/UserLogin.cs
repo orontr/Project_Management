@@ -9,14 +9,14 @@ namespace ProjectManagement.Models
     public class UserLogin
     {
         [Key]
-        [Required(ErrorMessage = "Requierd!")]
-        [RegularExpression("^[0-9a-zA-Z]+$", ErrorMessage = "Username can contain only numbers and letters!")]
-        [StringLength(20, ErrorMessage = "Max 20 characters")]
+        [Required(ErrorMessage = "שדה חובה")]
+        [RegularExpression("^[0-9a-zA-Z]+$", ErrorMessage = "שם משתמש מכיל אותיות באנגלית ומספרים בלבד")]
+        [StringLength(20, ErrorMessage = "מקסימום 20 תווים")]
         public string UserName { get; set; }
         //TODO: regex for password, at least one capial ,one number and one small letter
-        [Required(ErrorMessage = "Requierd!")]
-        [RegularExpression("[a-zA-Z0-9]+$", ErrorMessage = "Must to contain at least capital letter, small letter and number")]
-        [StringLength(20, MinimumLength = 8, ErrorMessage = "min 8 max 20 characters")]
+        [Required(ErrorMessage = "שדה חובה")]
+        [RegularExpression("[a-zA-Z0-9]+$", ErrorMessage = "סיסמה מכילה אותיות באנגלית ומספרים בלבד")]
+        [StringLength(20, MinimumLength = 8, ErrorMessage = "לפחות 8 תווים , מקסימום 20 תווים")]
         public string Password { get; set; }
     }
 }

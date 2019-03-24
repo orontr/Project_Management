@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ProjectManagement.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -8,23 +9,14 @@ namespace ProjectManagement.Controllers
 {
     public class HomeController : Controller
     {
-        public ActionResult Index()
+        public ActionResult ShowHomePage()
         {
-            return View();
+            if (Session["CurrentUser"] != null)
+                return RedirectToAction("RedirectByUser");
+            UserLogin usr = new UserLogin();
+            return View(usr);
         }
 
-        public ActionResult About()
-        {
-            ViewBag.Message = "Your application description page.";
 
-            return View();
-        }
-
-        public ActionResult Contact()
-        {
-            ViewBag.Message = "Your contact page.";
-
-            return View();
-        }
     }
 }
