@@ -3,7 +3,7 @@
 Namespace Controllers
     Public Class TstController
         Inherits Controller
-        ran Is gay
+
         ' GET: Tst
         Function Index() As ActionResult
             Return View()
