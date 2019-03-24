@@ -17,11 +17,11 @@ namespace ProjectManagement.Models
         [StringLength(150, ErrorMessage = "Max 150 characters")]
         public String Email { get; set; }
         [Required(ErrorMessage = "Requierd!")]
-        [RegularExpression("^[0-9a-zA-Z]+$", ErrorMessage = "Username can contain only numbers and letters!")]
-        [StringLength(20, ErrorMessage = "Max 20 characters")]
+        [RegularExpression("^[a-zA-Z]+$", ErrorMessage = "First name can contain only letters!")]
+        [StringLength(50, ErrorMessage = "Max 50 characters")]
         public string FirstName { get; set; }
         [Required(ErrorMessage = "Requierd!")]
-        [RegularExpression("^[0-9a-zA-Z]+$", ErrorMessage = "Username can contain only numbers and letters!")]
+        [RegularExpression("^[a-zA-Z]+$", ErrorMessage = "Last name can contain only letters!")]
         [StringLength(20, ErrorMessage = "Max 20 characters")]
         public string LastName { get; set; }
     }
