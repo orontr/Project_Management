@@ -68,7 +68,7 @@ namespace ProjectManagement.Controllers
                 usrDal.Users.Add(usr.NewUser);
                 usrDal.SaveChanges();
                 ViewBag.registerSuccessMsg = "ההרשמה בוצעה בהצלחה!";
-                return View("HomePage", usr.NewUser);
+                return View("ShowHomePage", usr.NewUser);
             }
             else
             {
