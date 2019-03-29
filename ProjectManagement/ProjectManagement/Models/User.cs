@@ -8,21 +8,20 @@ namespace ProjectManagement.Models
 {
     public class User:UserLogin
     {
-        public int Grp { get; set; }
-        [RegularExpression("[C|D|M]$", ErrorMessage = "")]
+        
         [StringLength(1, ErrorMessage = "")]
         public string Type { get; set; }
-        [Required(ErrorMessage = "Requierd!")]
-        [RegularExpression(@" ^ ([\w\.\-] +)@([\w\-] +)((\.(\w){2, 3})+)$", ErrorMessage = "Please enter a valid email address")]
-        [StringLength(150, ErrorMessage = "Max 150 characters")]
+        [Required(ErrorMessage = "שדה חובה")]
+        [StringLength(150, ErrorMessage = "מקסימום 150 תווים")]
         public String Email { get; set; }
-        [Required(ErrorMessage = "Requierd!")]
+        [Required(ErrorMessage = "שדה חובה")]
         [RegularExpression("^[a-zA-Z]+$", ErrorMessage = "First name can contain only letters!")]
-        [StringLength(50, ErrorMessage = "Max 50 characters")]
+        [StringLength(50, ErrorMessage = "מקסימום 50 תווים")]
         public string FirstName { get; set; }
-        [Required(ErrorMessage = "Requierd!")]
+        [Required(ErrorMessage = "שדה חובה")]
         [RegularExpression("^[a-zA-Z]+$", ErrorMessage = "Last name can contain only letters!")]
-        [StringLength(20, ErrorMessage = "Max 20 characters")]
+        [StringLength(20, ErrorMessage = "מקסימום 20 תווים")]
         public string LastName { get; set; }
+        public int Grp { get; set; }
     }
 }

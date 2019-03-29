@@ -28,7 +28,7 @@
         <div>
             <label>שם פרטי</label>
             @Html.TextBoxFor(m => m.NewUser.FirstName, new { Class = "form-control" })
-            <div style="color:red">@Html.ValidationMessageFor(x => x.NewUser.LastName)</div>
+            <div style="color:red">@Html.ValidationMessageFor(x => x.NewUser.FirstName)</div>
         </div>
 
         <div>
