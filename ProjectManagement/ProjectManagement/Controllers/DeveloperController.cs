@@ -8,10 +8,21 @@ namespace ProjectManagement.Controllers
 {
     public class DeveloperController : Controller
     {
-        // GET: Developer
-        public ActionResult Index()
+        private bool Authorize()
         {
+            if (Session["CurrentUser"] == null)
+                return false;
+            else
+                return true;
+        }
+        
+        public ActionResult ShowDeveloperPage()
+        {
+            if (!Authorize())
+                return View("RedirectByUser", "Home");
             return View();
         }
+
+
     }
 }

@@ -11,22 +11,24 @@ namespace ProjectManagement.Controllers
 {
     public class HomeController : Controller
     {
-        //public ActionResult RedirectByUser()
-        //{
-        //    if (Session["CurrentUser"] != null)
-        //    {
-        //        User currentUsr = (User)(Session["CurrentUser"]);
-        //        if (currentUsr.IsManager)
-        //            return RedirectToAction("ShowManagerPage", "Manager");
-        //        else
-        //            return RedirectToAction("ShowRoommatePage", "Roommate");
-        //    }
-        //    else
-        //    {
-        //        TempData["notAuthorized"] = "אין הרשאה!";
-        //        return RedirectToAction("HomePage");
-        //    }
-        //}
+        public ActionResult RedirectByUser()
+        {
+            if (Session["CurrentUser"] != null)
+            {
+                User currentUsr = (User)(Session["CurrentUser"]);
+                if (currentUsr.Type=="M")
+                    return RedirectToAction("ShowManagerPage", "Manager");
+                else if (currentUsr.Type == "C")
+                    return RedirectToAction("ShowClientPage", "Client");
+                else
+                    return RedirectToAction("ShowDeveloperPage", "Developer");
+            }
+            else
+            {
+                TempData["notAuthorized"] = "אין הרשאה!";
+                return RedirectToAction("HomePage");
+            }
+        }
 
         public ActionResult ShowHomePage()
         {
@@ -35,6 +37,7 @@ namespace ProjectManagement.Controllers
             UserLogin usr = new UserLogin();
             return View(usr);
         }
+
         public ActionResult Register()
         {
             if (Session["CurrentUser"] != null)
@@ -43,7 +46,6 @@ namespace ProjectManagement.Controllers
             newUsr.NewUser = new User();
             return View(newUsr);
         }
-
         [HttpPost]
         public ActionResult RegisterSubmit(VMUserRegister usr)
         {
@@ -77,5 +79,32 @@ namespace ProjectManagement.Controllers
             }
         }
 
+        [HttpPost]
+        public ActionResult Login(UserLogin usr)
+        {
+            if (Session["CurrentUser"] != null)
+                return RedirectToAction("RedirectByUser");
+            if (ModelState.IsValid)
+            {
+                UserDal usrDal = new UserDal();
+
+                User objUser = (from user in usrDal.Users
+                                where user.UserName == usr.UserName
+                                select user).FirstOrDefault<User>();
+                if (objUser == null || objUser.Password != usr.Password)
+                {
+                    ViewBag.errorUserLogin = "המשתמש או הסיסמה שגויים";
+                    return View("ShowHomePage", usr);
+                }
+                objUser.Password = "";
+                Session["CurrentUser"] = objUser;
+                return RedirectToAction("RedirectByUser");
+            }
+            else
+            {
+                usr.Password = "";
+                return View("HomePage", usr);
+            }
+        }
     }
 }
