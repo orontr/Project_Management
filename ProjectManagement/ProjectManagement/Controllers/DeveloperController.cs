@@ -19,7 +19,7 @@ namespace ProjectManagement.Controllers
         public ActionResult ShowDeveloperPage()
         {
             if (!Authorize())
-                return View("RedirectByUser", "Home");
+                return RedirectToAction("RedirectByUser", "Home");
             return View();
         }
 

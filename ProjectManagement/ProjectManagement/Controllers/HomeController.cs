@@ -26,7 +26,7 @@ namespace ProjectManagement.Controllers
             else
             {
                 TempData["notAuthorized"] = "אין הרשאה!";
-                return RedirectToAction("HomePage");
+                return RedirectToAction("ShowHomePage");
             }
         }
 
