@@ -103,7 +103,7 @@ namespace ProjectManagement.Controllers
             else
             {
                 usr.Password = "";
-                return View("HomePage", usr);
+                return View("ShowHomePage", usr);
             }
         }
     }

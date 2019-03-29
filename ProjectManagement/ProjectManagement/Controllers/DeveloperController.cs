@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ProjectManagement.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -10,7 +11,8 @@ namespace ProjectManagement.Controllers
     {
         private bool Authorize()
         {
-            if (Session["CurrentUser"] == null)
+            User usr = (User)(Session["CurrentUser"]);
+            if (Session["CurrentUser"] == null || usr.Type != "D")
                 return false;
             else
                 return true;
