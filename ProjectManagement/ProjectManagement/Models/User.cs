@@ -20,7 +20,7 @@ namespace ProjectManagement.Models
         [StringLength(50, ErrorMessage = "מקסימום 50 תווים")]
         public string FirstName { get; set; }
         [Required(ErrorMessage = "שדה חובה")]
-        [RegularExpression("^[a-zA-Z]+$", ErrorMessage = "Last name can contain only letters!")]
+        [RegularExpression("[a-zA-Z]+$", ErrorMessage = "Last name can contain only letters!")]
         [StringLength(20, ErrorMessage = "מקסימום 20 תווים")]
         public string LastName { get; set; }
         public int Grp { get; set; }

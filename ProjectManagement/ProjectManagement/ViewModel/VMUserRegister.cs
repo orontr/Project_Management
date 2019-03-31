@@ -21,6 +21,10 @@ namespace ProjectManagement.ViewModel
         [DataType(DataType.Password)]
         [Compare("Password", ErrorMessage = "הזן את אותה סיסמה")]
         public string ConfirmPassword { get; set; }
+        [Required(ErrorMessage = "שדה חובה")]
+        [RegularExpression(@"[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])", ErrorMessage = "הכנס מייל חוקי")]
+        [StringLength(150, ErrorMessage = "מקסימום 150 תווים")]
+        public String Email { get; set; }
         public User NewUser { get; set; }
     }
 }

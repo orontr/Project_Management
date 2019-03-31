@@ -51,6 +51,7 @@ namespace ProjectManagement.Controllers
             if (Session["CurrentUser"] != null)
                 return RedirectToAction("RedirectByUser");
             usr.NewUser.Password = usr.Password;
+            usr.NewUser.Email = usr.Email;
             ModelState.Clear();
             TryValidateModel(usr);
             if (ModelState.IsValid)
