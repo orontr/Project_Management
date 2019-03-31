@@ -6,7 +6,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-
 namespace ProjectManagement.Controllers
 {
     public class HomeController : Controller
@@ -103,8 +102,13 @@ namespace ProjectManagement.Controllers
             else
             {
                 usr.Password = "";
-                return View("HomePage", usr);
+                return View("ShowHomePage", usr);
             }
+        }
+        public ActionResult Logout()
+        {
+            Session["CurrentUser"] = null;
+            return RedirectToAction("ShowHomePage");
         }
     }
 }
