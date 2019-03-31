@@ -8,9 +8,18 @@ namespace ProjectManagement.Controllers
 {
     public class ManagerController : Controller
     {
-        // GET: Management
-        public ActionResult Index()
+        private bool Authorize()
         {
+            if (Session["CurrentUser"] == null)
+                return false;
+            else
+                return true;
+        }
+
+        public ActionResult ShowManagerPage()
+        {
+            if (!Authorize())
+                return RedirectToAction("RedirectByUser", "Home");
             return View();
         }
     }
