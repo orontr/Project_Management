@@ -1,0 +1,39 @@
+﻿@model ProjectManagement.Models.User
+
+@{
+    ViewBag.Title = "ShowDeveloperProfile";
+}
+
+<div style="color:red">@TempData["notUpdate"]</div>
+<div style="color:green">@TempData["Update"]</div>
+<h2>הפרטים האישיים</h2>
+<div id="updateForm">
+    @using (Html.BeginForm("UpdateDeveloperProfileSubmit", "Developer", FormMethod.Post, new { Class = "form-group" }))
+    {
+
+        <div>
+            <label>שם פרטי</label>
+            @Html.TextBoxFor(m => m.FirstName, new { Class = "form-control" })
+            <div style="color:red">@Html.ValidationMessageFor(x => x.FirstName)</div>
+        </div>
+
+        <div>
+            <label>שם משפחה</label>
+            @Html.TextBoxFor(m => m.LastName, new { Class = "form-control" })
+            <div style="color:red">@Html.ValidationMessageFor(x => x.LastName)</div>
+        </div>
+
+        <div>
+            <label>Email</label>
+            @Html.TextBoxFor(m => m.Email, new { Class = "form-control" })
+            <div style="color:red">@Html.ValidationMessageFor(x => x.Email)</div>
+        </div>
+
+        <div style="color:red">
+            @ViewBag.errorUserRegister
+        </div>
+        <br />
+        <input class="btn btn-primary" id="update" type="submit" value="עדכן" />
+    }
+</div>
+<input class="btn btn-primary" id="UpdatePassword" type="button" value="שינוי סיסמה" onclick="location.href='@Url.Action("UpdatePassword", "Developer")'" />
