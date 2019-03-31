@@ -12,6 +12,7 @@ namespace ProjectManagement.Models
         [StringLength(1, ErrorMessage = "")]
         public string Type { get; set; }
         [Required(ErrorMessage = "שדה חובה")]
+        [RegularExpression(@"[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])", ErrorMessage = "הכנס מייל חוקי")]
         [StringLength(150, ErrorMessage = "מקסימום 150 תווים")]
         public String Email { get; set; }
         [Required(ErrorMessage = "שדה חובה")]
