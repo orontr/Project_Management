@@ -33,8 +33,6 @@ namespace ProjectManagement.Controllers
                 return RedirectToAction("RedirectByUser", "Home");
             return View((User)Session["CurrentUser"]);
         }
-
-
         [HttpPost]
         public ActionResult UpdateDeveloperProfileSubmit(UserUpdate usr)
         {
@@ -52,10 +50,39 @@ namespace ProjectManagement.Controllers
                 updateUser.Email = usr.Email;
                 usrDal.SaveChanges();
                 TempData["Update"] = "השינויים בוצעו בהצלחה";
+                Session["CurrentUser"] = usrDal.Users.FirstOrDefault(x => x.UserName == CurrentUser.UserName);
                 return View("ShowDeveloperProfile");
             }
             TempData["notUpdate"] = "לא בוצעו שינוים!";
-            return View("ShowDeveloperProfile");
+            return RedirectToAction("ShowDeveloperProfile");
+
+        }
+
+        public ActionResult UpdatePassword()
+        {
+            if (!Authorize())
+                return RedirectToAction("RedirectByUser", "Home");
+            return View(new UpdatePass());
+        }
+        [HttpPost]
+        public ActionResult UpdateDeveloperPassSubmit(UpdatePass pass)
+        {
+            if (Session["CurrentUser"] == null)
+                return RedirectToAction("RedirectByUser");
+            User CurrentUser = (User)Session["CurrentUser"];
+            TryValidateModel(pass);
+            if (ModelState.IsValid && pass.OldPassword==CurrentUser.Password)
+            {
+
+                UserDal usrDal = new UserDal();
+                User updateUser = usrDal.Users.FirstOrDefault(x => x.UserName == CurrentUser.UserName);
+                updateUser.Password = pass.NewPassword;
+                usrDal.SaveChanges();
+                TempData["Update"] = "הסיסמה שונתה בהצלחה";
+                return RedirectToAction("ShowDeveloperProfile");
+            }
+            TempData["notUpdate"] = "לא בוצע שינוי!";
+            return RedirectToAction("ShowDeveloperProfile");
 
         }
     }
