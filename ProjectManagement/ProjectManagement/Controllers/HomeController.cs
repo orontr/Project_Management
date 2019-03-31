@@ -110,5 +110,25 @@ namespace ProjectManagement.Controllers
             Session["CurrentUser"] = null;
             return RedirectToAction("ShowHomePage");
         }
+
+        public ActionResult ShowProfile()
+        {
+            if (Session["CurrentUser"] != null)
+            {
+                User currentUsr = (User)(Session["CurrentUser"]);
+                if (currentUsr.Type=="M")
+                    return RedirectToAction("ShowManagerProfile", "Manager");
+                else if (currentUsr.Type == "C")
+                    return RedirectToAction("ShowClientProfile", "Client");
+                else
+                    return RedirectToAction("ShowDeveloperProfile", "Developer");
+            }
+            else
+            {
+                TempData["notAuthorized"] = "אין הרשאה!";
+                return RedirectToAction("ShowHomePage");
+            }
+
+        }
     }
 }
