@@ -1,5 +1,6 @@
 ﻿using ProjectManagement.DAL;
 using ProjectManagement.Models;
+using ProjectManagement.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -83,5 +84,16 @@ namespace ProjectManagement.Controllers
             return RedirectToAction("ShowManagerProfile");
 
         }
+
+        public ActionResult AddCourse()
+        {
+            User CurrentUser = (User)Session["CurrentUser"];
+            VMYourCourses obj = new VMYourCourses();
+            obj.courses = (from c in (new CoursesDal().courses)
+                           where c.userName == CurrentUser.UserName
+                           select c).ToList<Courses>();
+            return View(obj);
+        }
+        public 
     }
 }     

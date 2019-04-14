@@ -1,0 +1,30 @@
+﻿@model ProjectManagement.ViewModel.VMYourCourses
+    @using ProjectManagement.Models
+
+@{
+    ViewBag.Title = "AddCourse";
+}
+
+<h2>AddCourse</h2>
+
+<table class="">
+    <tr>
+        <td>  שם קורס  </td>
+
+
+    </tr>
+    @foreach (Courses obj in Model.courses)
+    {
+        <tr>
+            <td>@obj.name </td>
+      
+    </tr>
+}
+</table>
+<div>
+    <label>הוסף קורס חדש</label>
+    @Html.TextBoxFor(m => m.course.name, new { Class = "form-control" })
+    <div style="color:red">@Html.ValidationMessageFor(x => x.course.name)</div>
+    <input class="btn btn-primary" id="AddCourseSub" type="submit" value="הוסף" />
+</div>
+

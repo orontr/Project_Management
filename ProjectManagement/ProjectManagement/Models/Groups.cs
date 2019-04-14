@@ -10,7 +10,5 @@ namespace ProjectManagement.Models
         public int Team { get; set; }
         public string Developer { get; set; }
         public string Client { get; set; }
-
-
     }
 }
