@@ -94,6 +94,12 @@ namespace ProjectManagement.Controllers
                            select c).ToList<Courses>();
             return View(obj);
         }
-        public 
+        public ActionResult AddCourseSub(VMYourCourses c)
+        {
+            if (Session["CurrentUser"] == null)
+                return RedirectToAction("RedirectByUser");
+            return View("AddCourse");
+
+        }
     }
 }     
