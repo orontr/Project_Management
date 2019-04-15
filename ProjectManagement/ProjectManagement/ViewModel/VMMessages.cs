@@ -1,0 +1,13 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using ProjectManagement.Models;
+
+namespace ProjectManagement.ViewModel
+{
+    public class VMMessages
+    {
+        public List<Message> Messages { get; set; }
+    }
+}

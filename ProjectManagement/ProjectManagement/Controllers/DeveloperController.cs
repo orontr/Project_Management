@@ -2,6 +2,7 @@
 using System.Web.Mvc;
 using ProjectManagement.DAL;
 using ProjectManagement.Models;
+using ProjectManagement.ViewModel;
 
 namespace ProjectManagement.Controllers
 {
@@ -90,6 +91,19 @@ namespace ProjectManagement.Controllers
                     return RedirectToAction("RedirectByUser", "Home");
                 return View();
             }
+        }
 
+        public ActionResult ReciverMessages()
+            {
+                if (!Authorize())
+                    return RedirectToAction("RedirectByUser", "Home");
+                VMMessages msgs = new VMMessages();
+                MessageDal msDal = new MessageDal();
+                User curr = (User)Session["CurrentUser"];
+                msgs.Messages = (from msg in msDal.messages
+                                 where msg.Receiver == curr.UserName
+                                 select msg).ToList<Message>();
+                return View(msgs);
+            }
     }
 }
