@@ -108,7 +108,6 @@ namespace ProjectManagement.Controllers
                 TempData["courseSuccessMsg"] = "קורס התווסף בהצלחה!";
             }
             return RedirectToAction("AddCourse");
-
         }
     }
 }     
