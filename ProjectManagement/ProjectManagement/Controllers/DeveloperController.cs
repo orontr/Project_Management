@@ -1,10 +1,7 @@
-﻿using ProjectManagement.DAL;
-using ProjectManagement.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using System.Linq;
 using System.Web.Mvc;
+using ProjectManagement.DAL;
+using ProjectManagement.Models;
 
 namespace ProjectManagement.Controllers
 {
@@ -85,5 +82,14 @@ namespace ProjectManagement.Controllers
             return RedirectToAction("ShowDeveloperProfile");
 
         }
+
+        public ActionResult MessagesPage()
+        {
+            {
+                if (!Authorize())
+                    return RedirectToAction("RedirectByUser", "Home");
+                return View();
+            }
+
     }
 }

@@ -8,20 +8,14 @@ namespace ProjectManagement.Models
 {
     public class Message
     {
-        public DateTime DateOfMessage { get; set; }
+        public DateTime DateAndTime { get; set; }
         [Key]
-        public int NumberOfMessage { get; set; }
-        [Required]
-        [StringLength(300, ErrorMessage = "Maximum 300 characters.")]
-        public String message { get; set; }
-        [Required]
-        [StringLength(35, ErrorMessage = "Maximum 35 characters.")]
-        public String Subject { get; set; }
-        [Required]
-        [StringLength(35, ErrorMessage = "Maximum 35 characters.")]
+        public int NumOfMessage { get; set; }
+  
+        public String TextMessage { get; set; }
+      
         public string Sender { get; set; }
-        [Required]
-        [StringLength(35, ErrorMessage = "Maximum 35 characters.")]
+       
         public string Receiver { get; set; }
 
     }
