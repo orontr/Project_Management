@@ -96,9 +96,18 @@ namespace ProjectManagement.Controllers
         }
         public ActionResult AddCourseSub(VMYourCourses c)
         {
-            if (Session["CurrentUser"] == null)
-                return RedirectToAction("RedirectByUser");
-            return View("AddCourse");
+            if(!Authorize())
+                return RedirectToAction("RedirectByUser", "Home");
+            User currentUser = (User)Session["CurrentUser"];
+            c.course.userName = currentUser.UserName;
+            if (ModelState.IsValid)
+            {
+                CoursesDal courseDal = new CoursesDal();
+                courseDal.courses.Add(c.course);
+                courseDal.SaveChanges();
+                TempData["courseSuccessMsg"] = "קורס התווסף בהצלחה!";
+            }
+            return RedirectToAction("AddCourse");
 
         }
     }
