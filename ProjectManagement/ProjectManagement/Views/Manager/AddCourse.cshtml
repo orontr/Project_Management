@@ -21,10 +21,22 @@
     </tr>
 }
 </table>
-<div>
-    <label>הוסף קורס חדש</label>
-    @Html.TextBoxFor(m => m.course.name, new { Class = "form-control" })
-    <div style="color:red">@Html.ValidationMessageFor(x => x.course.name)</div>
-    <input class="btn btn-primary" id="AddCourseSub" type="submit" value="הוסף" />
+<<div id="AddCourse">
+    @using (Html.BeginForm("AddCourseSub", "Manager", FormMethod.Post, new { Class = "form-group" }))
+    {
+       
+        <div>
+            <label>שם</label>
+            @Html.TextBoxFor(m => m.course.name, new { Class = "form-control" })
+            <div style="color:red">@Html.ValidationMessageFor(x => x.course.name)</div>
+        </div>
+        <div style="color:red">
+            @ViewBag.errorUserLogin
+        </div>
+        <br />
+        <div class="input-group">
+            <input class="btn btn-primary" id="ADD" type="submit" value="הוסף" />
+        </div>
+        <div style="color:green">@ViewBag.registerSuccessMsg</div>
+    }
 </div>
-
