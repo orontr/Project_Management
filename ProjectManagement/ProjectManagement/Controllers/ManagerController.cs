@@ -109,5 +109,19 @@ namespace ProjectManagement.Controllers
             }
             return RedirectToAction("AddCourse");
         }
+        public ActionResult Forum()
+        {
+            VMForum vmForums = new VMForum();
+            User currentUser = (User)Session["CurrentUser"];
+            vmForums.forums = (from c in (new ForumsDal().forums)
+                               where c.Author == currentUser.UserName
+                               select c).ToList<Forum>();
+            return View(vmForums);
+        }
+        public ActionResult ForumSub()
+        {
+
+            return View();
+        }
     }
 }     
