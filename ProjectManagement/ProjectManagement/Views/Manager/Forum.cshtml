@@ -1,0 +1,20 @@
+﻿@model ProjectManagement.ViewModel.VMForum
+
+@{
+    ViewBag.Title = "Forum";
+}
+
+<h2>Forum</h2>
+
+@{
+    WebGrid forum = new WebGrid(Model.forums, rowsPerPage: 5);
+}
+@forum.GetHtml(
+    tableStyle: "table table-bordered table-responsive table-hover ",
+    columns: forum.Columns(
+        forum.Column(columnName: "כותרת", format: (item) => Html.ActionLink(((string)item.Title), "OpenForum", new { id = item.id })),
+        forum.Column("Title", "כותרת"),
+        forum.Column("Author", "מחבר"),
+        forum.Column("DateOfPost", "תאריך")
+        )
+    )

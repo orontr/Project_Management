@@ -112,9 +112,13 @@ namespace ProjectManagement.Controllers
         public ActionResult Forum()
         {
             VMForum vmForums = new VMForum();
-            User currentUser = (User)Session["CurrentUser"];
+            User current = (User)Session["CurrentUser"];
+            UserCourseDal UCdal = new UserCourseDal();
+            List<int> courses = (from userCourse in UCdal.courses
+                                  where current.UserName == userCourse.userName
+                                  select userCourse.courseNumber).ToList<int>();
             vmForums.forums = (from c in (new ForumsDal().forums)
-                               where c.Author == currentUser.UserName
+                               where courses.Contains(c.CourseNumber)
                                select c).ToList<Forum>();
             return View(vmForums);
         }
