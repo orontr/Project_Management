@@ -1,9 +1,7 @@
-﻿using System;
-using System.Linq;
+﻿using System.Linq;
 using System.Web.Mvc;
 using ProjectManagement.DAL;
 using ProjectManagement.Models;
-using ProjectManagement.ViewModel;
 
 namespace ProjectManagement.Controllers
 {
@@ -66,9 +64,7 @@ namespace ProjectManagement.Controllers
         [HttpPost]
         public ActionResult UpdateDeveloperPassSubmit(UpdatePass pass)
         {
-            if (Session["CurrentUser"] == null)
-                return RedirectToAction("RedirectByUser");
-            User CurrentUser = (User)Session["CurrentUser"];
+           ession["CurrentUser"];
             TryValidateModel(pass);
             if (ModelState.IsValid && pass.OldPassword==CurrentUser.Password)
             {
@@ -92,47 +88,6 @@ namespace ProjectManagement.Controllers
                     return RedirectToAction("RedirectByUser", "Home");
                 return View();
             }
-        }
-
-        public ActionResult ReciverMessages()
-            {
-                if (!Authorize())
-                    return RedirectToAction("RedirectByUser", "Home");
-                VMMessages msgs = new VMMessages();
-                MessageDal msDal = new MessageDal();
-                User curr = (User)Session["CurrentUser"];
-                msgs.Messages = (from msg in msDal.messages
-                                 where msg.Receiver == curr.UserName
-                                 select msg).ToList<Message>();
-                return View(msgs);
-            }
-        public ActionResult NewMessage()
-        {
-            if (!Authorize())
-                return RedirectToAction("RedirectByUser", "Home");
-            return View(new Message());
-        }
-        public ActionResult SendMessage(Message msg)
-        {
-            if (!Authorize())
-                return RedirectToAction("RedirectByUser", "Home");
-            User CurrentUser = (User)Session["CurrentUser"];
-            UserDal usDal = new UserDal();
-            if (usDal.Users.FirstOrDefault<User>(x => x.UserName == msg.Receiver) == null)
-            {
-                TempData["notUser"] = "לא קיים משתמש!";
-                return RedirectToAction("NewMessage");
-            }
-            
-            MessageDal msDal = new MessageDal();
-            msg.Sender = CurrentUser.UserName;
-            msg.DateAndTime = DateTime.Now;
-            msDal.messages.Add(msg);
-            msDal.SaveChanges();
-            TempData["OK"] = "הודעה נשלחה למשתמש";
-            return RedirectToAction("NewMessage");
-
-        }
 
     }
 }
