@@ -64,7 +64,9 @@ namespace ProjectManagement.Controllers
         [HttpPost]
         public ActionResult UpdateDeveloperPassSubmit(UpdatePass pass)
         {
-           ession["CurrentUser"];
+            if (Session["CurrentUser"] == null)
+                return RedirectToAction("RedirectByUser");
+            User CurrentUser = (User)Session["CurrentUser"];
             TryValidateModel(pass);
             if (ModelState.IsValid && pass.OldPassword==CurrentUser.Password)
             {
