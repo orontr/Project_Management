@@ -113,7 +113,7 @@ namespace ProjectManagement.Controllers
         {
             VMForum vmForums = new VMForum();
             User current = (User)Session["CurrentUser"];
-            UserCourseDal UCdal = new UserCourseDal();
+            
             List<int> courses = (from userCourse in UCdal.courses
                                   where current.UserName == userCourse.userName
                                   select userCourse.courseNumber).ToList<int>();
