@@ -89,8 +89,9 @@ namespace ProjectManagement.Controllers
         {
             User CurrentUser = (User)Session["CurrentUser"];
             VMYourCourses obj = new VMYourCourses();
-            obj.courses =   c.userName == CurrentUser.UserName
-                           .ToList<Courses>();
+            obj.courses = (from c in (new CoursesDal().courses)
+                           where c.userName == CurrentUser.UserName
+                           select c).ToList<Courses>();
             return View(obj);
         }
         public ActionResult AddCourseSub(VMYourCourses c)
