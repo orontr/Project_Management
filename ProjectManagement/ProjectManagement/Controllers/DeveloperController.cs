@@ -30,6 +30,7 @@ namespace ProjectManagement.Controllers
                 return RedirectToAction("RedirectByUser", "Home");
             return View((User)Session["CurrentUser"]);
         }
+
         [HttpPost]
         public ActionResult UpdateDeveloperProfileSubmit(UserUpdate usr)
         {
