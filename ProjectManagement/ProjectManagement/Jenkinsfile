@@ -10,7 +10,7 @@ pipeline {
    }
     stage('Dotnet Restore'){
         steps{
-        bat "dotnet restore"
+        sh "dotnet restore"
         }
     }
     
