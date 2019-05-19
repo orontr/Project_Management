@@ -1,6 +1,6 @@
 pipeline {
     agent { docker { image 'mcr.microsoft.com/dotnet/core/sdk:2.2-alpine' } }
-    environment {HOME = '/tmp'} 
+    environment {HOME = ''} 
     stages {
     stage('Git') {
       // Get some code from a GitHub repository
