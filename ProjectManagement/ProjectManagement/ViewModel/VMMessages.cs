@@ -9,5 +9,6 @@ namespace ProjectManagement.ViewModel
     public class VMMessages
     {
         public List<Message> Messages { get; set; }
+
     }
 }
