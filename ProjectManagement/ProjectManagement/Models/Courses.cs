@@ -6,6 +6,7 @@ using System.Web;
 
 namespace ProjectManagement.Models
 {
+
     public class Courses
     {
         [Key]
