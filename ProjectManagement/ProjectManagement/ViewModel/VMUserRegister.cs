@@ -27,4 +27,5 @@ namespace ProjectManagement.ViewModel
         public String Email { get; set; }
         public User NewUser { get; set; }
     }
+
 }
