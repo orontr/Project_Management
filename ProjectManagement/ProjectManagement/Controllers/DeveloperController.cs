@@ -23,7 +23,7 @@ namespace ProjectManagement.Controllers
             return View();
         }
 
-  
+
         public ActionResult ShowDeveloperProfile()
         {
             if (!Authorize())
@@ -39,7 +39,7 @@ namespace ProjectManagement.Controllers
             TryValidateModel(usr);
             if (ModelState.IsValid)
             {
-               
+
                 UserDal usrDal = new UserDal();
                 User updateUser = usrDal.Users.FirstOrDefault(x => x.UserName == CurrentUser.UserName);
                 updateUser.FirstName = usr.FirstName;
@@ -68,7 +68,7 @@ namespace ProjectManagement.Controllers
                 return RedirectToAction("RedirectByUser");
             User CurrentUser = (User)Session["CurrentUser"];
             TryValidateModel(pass);
-            if (ModelState.IsValid && pass.OldPassword==CurrentUser.Password)
+            if (ModelState.IsValid && pass.OldPassword == CurrentUser.Password)
             {
 
                 UserDal usrDal = new UserDal();
@@ -82,14 +82,6 @@ namespace ProjectManagement.Controllers
             return RedirectToAction("ShowDeveloperProfile");
 
         }
-
-        public ActionResult MessagesPage()
-        {
-            {
-                if (!Authorize())
-                    return RedirectToAction("RedirectByUser", "Home");
-                return View();
-            }
 
     }
 }
