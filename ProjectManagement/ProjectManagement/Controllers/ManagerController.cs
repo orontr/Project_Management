@@ -65,6 +65,7 @@ namespace ProjectManagement.Controllers
                 return RedirectToAction("RedirectByUser", "Home");
             return View(new UpdatePass());
         }
+
         [HttpPost]
         public ActionResult UpdateManagerPassSubmit(UpdatePass pass)
         {
