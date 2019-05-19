@@ -45,6 +45,7 @@ namespace ProjectManagement.Controllers
             newUsr.NewUser = new User();
             return View(newUsr);
         }
+
         [HttpPost]
         public ActionResult RegisterSubmit(VMUserRegister usr)
         {
