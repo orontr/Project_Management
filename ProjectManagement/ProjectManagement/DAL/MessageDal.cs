@@ -9,7 +9,6 @@ namespace ProjectManagement.DAL
 {
     public class MessageDal : DbContext
     {
-
         public DbSet<Message> messages { get; set; }
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
