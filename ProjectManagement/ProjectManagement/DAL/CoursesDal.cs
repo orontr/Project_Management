@@ -9,7 +9,6 @@ namespace ProjectManagement.DAL
 {
     public class CoursesDal : DbContext
     {
-       
             public DbSet<Courses> courses { get; set; }
             protected override void OnModelCreating(DbModelBuilder modelBuilder)
             {
