@@ -107,6 +107,7 @@ namespace ProjectManagement.Controllers
                 return View("ShowHomePage", usr);
             }
         }
+
         public ActionResult Logout()
         {
             Session["CurrentUser"] = null;
