@@ -8,11 +8,6 @@ pipeline {
           git 'https://github.com/orontr/Project_Management.git'
       }
    }
-    stage('Dotnet Restore'){
-        steps{
-        sh "dotnet restore ~/ProjectManagement.csproj"
-        }
-    }
     
    stage('Build'){
           steps{
