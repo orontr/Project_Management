@@ -86,37 +86,3 @@ namespace ProjectManagement.Controllers
     }
 }
 
-
-
-public ActionResult UpdatePassword()
-{
-    if (!Authorize())
-        return RedirectToAction("RedirectByUser", "Home");
-    return View(new UpdatePass());
-}
-[HttpPost]
-public ActionResult UpdateDeveloperPassSubmit(UpdatePass pass)
-{
-    if (Session["CurrentUser"] == null)
-        return RedirectToAction("RedirectByUser");
-    User CurrentUser = (User)Session["CurrentUser"];
-    TryValidateModel(pass);
-    if (ModelState.IsValid && pass.OldPassword == CurrentUser.Password)
-    {
-
-        UserDal usrDal = new UserDal();
-        User updateUser = usrDal.Users.FirstOrDefault(x => x.UserName == CurrentUser.UserName);
-        updateUser.Password = pass.NewPassword;
-        usrDal.SaveChanges();
-        TempData["Update"] = "הסיסמה שונתה בהצלחה";
-        return RedirectToAction("ShowDeveloperProfile");
-    }
-    TempData["notUpdate"] = "לא בוצע שינוי!";
-    return RedirectToAction("ShowDeveloperProfile");
-
-}
-
-
-
-
-
