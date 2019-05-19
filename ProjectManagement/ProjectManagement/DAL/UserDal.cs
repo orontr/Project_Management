@@ -7,6 +7,7 @@ using System.Web;
 
 namespace ProjectManagement.DAL
 {
+
     public class UserDal : DbContext
     {
         public DbSet<User> Users { get; set; }
