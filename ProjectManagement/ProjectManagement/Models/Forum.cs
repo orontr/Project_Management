@@ -8,7 +8,6 @@ namespace ProjectManagement.Models
 {
     public class Forum
     {
-
         [Key]
         public DateTime DateOfPost { get; set; }
         public int CourseNumber { get; set; }
