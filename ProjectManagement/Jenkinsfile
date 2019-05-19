@@ -10,7 +10,7 @@ pipeline {
    }
     stage('Dotnet Restore'){
         steps{
-        sh "dotnet restore  ~ProjectManagement/ProjectManagement/ProjectManagement.csproj"
+        sh "dotnet restore /ProjectManagement"
         }
     }
     
