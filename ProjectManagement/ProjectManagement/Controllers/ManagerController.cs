@@ -26,12 +26,14 @@ namespace ProjectManagement.Controllers
                 return RedirectToAction("RedirectByUser", "Home");
             return View();
         }
+
         public ActionResult ShowManagerProfile()
         {
             if (!Authorize())
                 return RedirectToAction("RedirectByUser", "Home");
             return View((User)Session["CurrentUser"]);
         }
+
         [HttpPost]
         public ActionResult UpdateManagerProfileSubmit(UserUpdate usr)
         {
