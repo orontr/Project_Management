@@ -1,0 +1,46 @@
+﻿@model ProjectManagement.Models.Groups
+
+@{
+    ViewBag.Title = "AddGroup";
+}
+
+<h2>AddGroup</h2>
+
+<div id="AddGroup">
+    @using (Html.BeginForm("AddGroupSubmit", "Manager", FormMethod.Post, new { Class = "form-group" }))
+    {
+        <div>
+            <label>מפתח1</label>
+            @Html.TextBoxFor(m => m.Developer1, new { Class = "form-control" })
+            <div style="color:red">@Html.ValidationMessageFor(x => x.Developer1)</div>
+        </div>
+
+        <div>
+            <label>מפתח2</label>
+            @Html.TextBoxFor(m => m.Developer2, new { Class = "form-control" })
+            <div style="color:red">@Html.ValidationMessageFor(x => x.Developer3)</div>
+        </div>
+
+        <div>
+            <label>מפתח3</label>
+            @Html.TextBoxFor(m => m.Developer3, new { Class = "form-control" })
+            <div style="color:red">@Html.ValidationMessageFor(x => x.Developer3)</div>
+        </div>
+
+        <div>
+            <label>לקוח</label>
+            @Html.TextBoxFor(m => m.Client, new { Class = "form-control" })
+            <div style="color:red">@Html.ValidationMessageFor(x => x.Client)</div>
+        </div>
+
+        <div style="color:red">
+            @ViewBag.errorUserRegister
+        </div>
+        <br />
+        <input class="btn btn-primary" id="add" type="submit" value="הוסף קבוצה" />
+    }
+    <div style="color:red">@TempData["notUser"]</div>
+    <div style="color:green">@TempData["OK"]</div>
+</div>
+
+

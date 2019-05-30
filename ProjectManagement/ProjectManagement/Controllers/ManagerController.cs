@@ -56,7 +56,7 @@ namespace ProjectManagement.Controllers
             return RedirectToAction("ShowManagerProfile");
 
         }
-  
+
         public ActionResult UpdatePassword()
         {
             if (!Authorize())
@@ -91,26 +91,99 @@ namespace ProjectManagement.Controllers
                 return RedirectToAction("RedirectByUser", "Home");
             User cur = (User)Session["CurrentUser"];
             GroupsDal grpdal = new GroupsDal();
-            VMGroupUsers vmGU = new VMGroupUsers();
-            List<GroupUsers> temp = new List<GroupUsers>();
-            HashSet<int> team = new HashSet<int>();
-            foreach (Groups grp in grpdal.groups)
-                team.Add(grp.Team);
-            foreach (int t in team)
-            {
-                List<string> dev = (from grp in grpdal.groups
-                                    where grp.Team == t
-                                    select grp.Developer).ToList<string>();
-                string cli = grpdal.groups.FirstOrDefault(x => x.Team == t).Client;
-                vmGU.groups.Add(new GroupUsers { Team = t, Developers = dev, Client = cli, Manager = cur.UserName });
-            }
-            return View(vmGU);
+            VMGroup vmgrp = new VMGroup();
+            vmgrp.groups = grpdal.groups.ToList<Groups>();
+            return View(vmgrp);
         }
-        
+
+        public ActionResult AddGroup()
+        {
+            if (!Authorize())
+                return RedirectToAction("RedirectByUser", "Home");
+            return View(new Groups());
+        }
+
+        [HttpPost]
+        public ActionResult AddGroupSubmit(Groups pass)
+        {
+            if (Session["CurrentUser"] == null)
+                return RedirectToAction("RedirectByUser", "Home");
+            User CurrentUser = (User)Session["CurrentUser"];
+            UserDal usDal = new UserDal();
+            if (pass.Developer1 != null && (usDal.Users.FirstOrDefault<User>(x => x.UserName == pass.Developer1) == null || usDal.Users.FirstOrDefault<User>(x => x.UserName == pass.Developer1).Type != "D"))
+            {
+                TempData["notUser"] = "לא קיים מפתח1!";
+                return RedirectToAction("AddGroup");
+            }
+            if (pass.Developer2 != null && (usDal.Users.FirstOrDefault<User>(x => x.UserName == pass.Developer2) == null || usDal.Users.FirstOrDefault<User>(x => x.UserName == pass.Developer2).Type != "D"))
+            {
+                TempData["notUser"] = "לא קיים מפתח2!";
+                return RedirectToAction("AddGroup");
+            }
+            if (pass.Developer3 != null && (usDal.Users.FirstOrDefault<User>(x => x.UserName == pass.Developer3) == null || usDal.Users.FirstOrDefault<User>(x => x.UserName == pass.Developer3).Type != "D"))
+            {
+                TempData["notUser"] = "לא קיים מפתח3!";
+                return RedirectToAction("AddGroup");
+            }
+            if (pass.Client == null || (usDal.Users.FirstOrDefault<User>(x => x.UserName == pass.Client) == null || usDal.Users.FirstOrDefault<User>(x => x.UserName == pass.Client).Type != "C"))
+            {
+                TempData["notUser"] = " חובה לא קיים לקוח!";
+                return RedirectToAction("AddGroup");
+            }
+            pass.Manager = CurrentUser.UserName;
+            GroupsDal grp = new GroupsDal();
+            grp.groups.Add(pass);
+            grp.SaveChanges();
+            return RedirectToAction("ShowGroups");
+        }
+        public ActionResult AddClient()
+        {
+            if (Session["CurrentUser"] == null)
+                return RedirectToAction("RedirectByUser", "Home");
+            return View(new User());
+        }
+
+
+        [HttpPost]
+        public ActionResult RegisterSubmit(User pass)
+        {
+            if (Session["CurrentUser"] == null)
+                return RedirectToAction("RedirectByUser", "Home");
+            pass.Type = "C";
+            TryValidateModel(pass);
+            if (ModelState.IsValid)
+            {
+                UserDal usdal = new UserDal();
+                if (usdal.Users.FirstOrDefault(x => x.UserName == pass.UserName) == null)
+                {
+                    usdal.Users.Add(pass);
+                    usdal.SaveChanges();
+                }
+                else
+                {
+                    TempData["notUser"] = "משתמש קיים";
+                    return View("AddClient");
+                }
+
+            }
+            else return View("AddClient");
+            TempData["OK"] = "לקוח התווסף בהצלחה ";
+            return View("ShowManagerPage");
+        }
 
 
 
 
+        public ActionResult ChooseForm()
+        {
+            if (Session["CurrentUser"] == null)
+                return RedirectToAction("RedirectByUser", "Home");
+            User usr = (User)Session["CurrentUser"];
+            FormDal frmdal = new FormDal();
+            List<Form> formss= frmdal.Forms.ToList<Form>();
+            VMForms fff = new VMForms { forms = formss };
+            return View(fff);
+        }
 
         public ActionResult Forum()
         {
@@ -118,8 +191,8 @@ namespace ProjectManagement.Controllers
             User current = (User)Session["CurrentUser"];
             UserCourseDal UCdal = new UserCourseDal();
             List<int> courses = (from userCourse in UCdal.courses
-                                  where current.UserName == userCourse.userName
-                                  select userCourse.courseNumber).ToList<int>();
+                                 where current.UserName == userCourse.userName
+                                 select userCourse.courseNumber).ToList<int>();
             vmForums.forums = (from c in (new ForumsDal().forums)
                                where courses.Contains(c.CourseNumber)
                                select c).ToList<Forum>();
@@ -130,5 +203,7 @@ namespace ProjectManagement.Controllers
 
             return View();
         }
+
+
     }
-}     
+}

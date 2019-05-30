@@ -1,0 +1,50 @@
+﻿@model ProjectManagement.Models.User
+
+@{
+    ViewBag.Title = "AddClient";
+}
+
+<h2>AddClient</h2>
+<div id="registerForm">
+    @using (Html.BeginForm("RegisterSubmit", "Manager", FormMethod.Post, new { Class = "form-group" }))
+    {
+        <div>
+            <label>שם משתמש</label>
+            @Html.TextBoxFor(m => m.UserName, new { Class = "form-control" })
+            <div style="color:red">@Html.ValidationMessageFor(x => x.UserName)</div>
+        </div>
+
+        <div>
+            <label>סיסמה</label>
+            @Html.PasswordFor(m => m.Password, new { Class = "form-control" })
+            <div style="color:red">@Html.ValidationMessageFor(x => x.Password)</div>
+        </div>
+
+        <div>
+            <label>שם פרטי</label>
+            @Html.TextBoxFor(m => m.FirstName, new { Class = "form-control" })
+            <div style="color:red">@Html.ValidationMessageFor(x => x.FirstName)</div>
+        </div>
+
+        <div>
+            <label>שם משפחה</label>
+            @Html.TextBoxFor(m => m.LastName, new { Class = "form-control" })
+            <div style="color:red">@Html.ValidationMessageFor(x => x.LastName)</div>
+        </div>
+
+        <div>
+            <label>Email</label>
+            @Html.TextBoxFor(m => m.Email, new { Class = "form-control" })
+            <div style="color:red">@Html.ValidationMessageFor(x => x.Email)</div>
+        </div>
+
+        <div style="color:red">
+            @ViewBag.errorUserRegister
+        </div>
+        <br />
+        <input class="btn btn-primary" id="register" type="submit" value="הוסף לקוח" />
+    }
+    <div style="color:red">@TempData["notUser"]</div>
+    <div style="color:green">@TempData["OK"]</div>
+</div>
+
