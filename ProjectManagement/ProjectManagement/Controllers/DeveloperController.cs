@@ -141,7 +141,7 @@ namespace ProjectManagement.Controllers
             {
 
                 FormDal usrDal = new FormDal();
-                Form f  = usrDal.Forms.FirstOrDefault(x => x.NameOfProject == form.NameOfProject);
+                Form f = usrDal.Forms.FirstOrDefault(x => x.NameOfProject == form.NameOfProject);
                 f.General = form.General;
                 f.Essence = form.Essence;
                 f.Goals = form.Goals;
@@ -154,7 +154,21 @@ namespace ProjectManagement.Controllers
             return RedirectToAction("ShowDeveloperPage");
 
         }
-    }
 
+        public ActionResult PrintViewToPdf()
+        {
+            var report = new ActionAsPdf("Index");
+            return report;
+        }
+
+        public ActionResult PrintPartialViewToPdf(Form f)
+        {
+
+            var report = new PartialViewAsPdf("~/Views/Shared/DetailCustomer.cshtml", f);
+            return report;
+
+
+        }
+    }
 }
 
