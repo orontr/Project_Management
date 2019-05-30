@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
 using ProjectManagement.DAL;
@@ -156,12 +157,6 @@ namespace ProjectManagement.Controllers
 
         }
 
-        public ActionResult PrintViewToPdf()
-        {
-            var report = new ActionAsPdf("Index");
-            return report;
-        }
-
         public ActionResult PrintPartialViewToPdf(string name)
         {
 
@@ -169,6 +164,54 @@ namespace ProjectManagement.Controllers
             var report = new PartialViewAsPdf("~/Views/Developer/EditForm.cshtml", f);
             return report;
 
+
+        }
+        public ActionResult MessagesPage()
+        {
+            {
+                if (!Authorize())
+                    return RedirectToAction("RedirectByUser", "Home");
+                return View();
+            }
+        }
+
+        public ActionResult ReciverMessages()
+        {
+            if (!Authorize())
+                return RedirectToAction("RedirectByUser", "Home");
+            VMMessages msgs = new VMMessages();
+            MessageDal msDal = new MessageDal();
+            User curr = (User)Session["CurrentUser"];
+            msgs.Messages = (from msg in msDal.messages
+                             where msg.Receiver == curr.UserName
+                             select msg).ToList<Message>();
+            return View(msgs);
+        }
+        public ActionResult NewMessage()
+        {
+            if (!Authorize())
+                return RedirectToAction("RedirectByUser", "Home");
+            return View(new Message());
+        }
+        public ActionResult SendMessage(Message msg)
+        {
+            if (!Authorize())
+                return RedirectToAction("RedirectByUser", "Home");
+            User CurrentUser = (User)Session["CurrentUser"];
+            UserDal usDal = new UserDal();
+            if (usDal.Users.FirstOrDefault<User>(x => x.UserName == msg.Receiver) == null)
+            {
+                TempData["notUser"] = "לא קיים משתמש!";
+                return RedirectToAction("NewMessage");
+            }
+
+            MessageDal msDal = new MessageDal();
+            msg.Sender = CurrentUser.UserName;
+            msg.DateAndTime = DateTime.Now;
+            msDal.messages.Add(msg);
+            msDal.SaveChanges();
+            TempData["OK"] = "הודעה נשלחה למשתמש";
+            return RedirectToAction("NewMessage");
 
         }
     }
