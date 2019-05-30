@@ -1,0 +1,35 @@
+﻿@model ProjectManagement.ViewModel.VMGroupUsers
+
+@{
+    ViewBag.Title = "ShowGroups";
+}
+
+<h2>ShowGroups</h2>
+
+@using (Html.BeginForm("EditForm", "Developer", FormMethod.Get))
+    @using ProjectManagement.Models
+{
+    <span style="color:blue"> המסמכים שלך</span>
+    <br />
+    <table class="table table-bordered table-responsive table-hover">
+        <tr>
+            <td>  מסספר קבוצה  </td>
+            <td>  מפתחים  </td>
+            <td>  לקוח  </td>
+            <td>  מנהל  </td>
+
+        </tr>
+        @foreach (GroupUsers obj in Model.groups)
+        {
+        <tr>
+            <td>@obj.Team </td>
+            <td>
+                @foreach (string dev in obj.Developers)
+                    @dev
+            </td>
+            <td>@obj.Client </td>
+            <td>@obj.Manager </td>
+        </tr>
+        }
+    </table>
+}

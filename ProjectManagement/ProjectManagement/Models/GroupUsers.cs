@@ -5,11 +5,10 @@ using System.Web;
 
 namespace ProjectManagement.Models
 {
-    public class Groups
+    public class GroupUsers
     {
-        
         public int Team { get; set; }
-        public string Developer { get; set; }
+        public List<string> Developers { get; set; }
         public string Client { get; set; }
         public string Manager { get; set; }
     }

@@ -56,7 +56,7 @@ namespace ProjectManagement.Controllers
             return RedirectToAction("ShowManagerProfile");
 
         }
-
+  
         public ActionResult UpdatePassword()
         {
             if (!Authorize())
@@ -85,30 +85,33 @@ namespace ProjectManagement.Controllers
 
         }
 
-        public ActionResult AddCourse()
+        public ActionResult ShowGroups()
         {
-            User CurrentUser = (User)Session["CurrentUser"];
-            VMYourCourses obj = new VMYourCourses();
-            obj.courses = (from c in (new CoursesDal().courses)
-                           where c.userName == CurrentUser.UserName
-                           select c).ToList<Courses>();
-            return View(obj);
-        }
-        public ActionResult AddCourseSub(VMYourCourses c)
-        {
-            if(!Authorize())
+            if (!Authorize())
                 return RedirectToAction("RedirectByUser", "Home");
-            User currentUser = (User)Session["CurrentUser"];
-            c.course.userName = currentUser.UserName;
-            if (ModelState.IsValid)
+            User cur = (User)Session["CurrentUser"];
+            GroupsDal grpdal = new GroupsDal();
+            VMGroupUsers vmGU = new VMGroupUsers();
+            List<GroupUsers> temp = new List<GroupUsers>();
+            HashSet<int> team = new HashSet<int>();
+            foreach (Groups grp in grpdal.groups)
+                team.Add(grp.Team);
+            foreach (int t in team)
             {
-                CoursesDal courseDal = new CoursesDal();
-                courseDal.courses.Add(c.course);
-                courseDal.SaveChanges();
-                TempData["courseSuccessMsg"] = "קורס התווסף בהצלחה!";
+                List<string> dev = (from grp in grpdal.groups
+                                    where grp.Team == t
+                                    select grp.Developer).ToList<string>();
+                string cli = grpdal.groups.FirstOrDefault(x => x.Team == t).Client;
+                vmGU.groups.Add(new GroupUsers { Team = t, Developers = dev, Client = cli, Manager = cur.UserName });
             }
-            return RedirectToAction("AddCourse");
+            return View(vmGU);
         }
+        
+
+
+
+
+
         public ActionResult Forum()
         {
             VMForum vmForums = new VMForum();

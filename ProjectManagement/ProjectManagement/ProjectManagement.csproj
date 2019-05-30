@@ -140,6 +140,7 @@
     <Compile Include="DAL\CoursesDal.cs" />
     <Compile Include="DAL\FormDal.cs" />
     <Compile Include="DAL\ForumsDal.cs" />
+    <Compile Include="DAL\GroupsDal.cs" />
     <Compile Include="DAL\MessageDal.cs" />
     <Compile Include="DAL\UserCourseDal.cs" />
     <Compile Include="DAL\UserDal.cs" />
@@ -150,6 +151,7 @@
     <Compile Include="Models\Courses.cs" />
     <Compile Include="Models\Forum.cs" />
     <Compile Include="Models\Groups.cs" />
+    <Compile Include="Models\GroupUsers.cs" />
     <Compile Include="Models\Message.cs" />
     <Compile Include="Models\UpdatePass.cs" />
     <Compile Include="Models\UserCourse.cs" />
@@ -159,6 +161,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModel\VMForms.cs" />
     <Compile Include="ViewModel\VMForum.cs" />
+    <Compile Include="ViewModel\VMGroupUsers.cs" />
     <Compile Include="ViewModel\VMMessages.cs" />
     <Compile Include="ViewModel\VMUserRegister.cs" />
     <Compile Include="ViewModel\VMYourCourses.cs" />
@@ -212,7 +215,6 @@
     <Content Include="Views\Manager\ShowManagerProfile.cshtml" />
     <Content Include="Views\Manager\UpdatePassword.cshtml" />
     <Content Include="Views\Client\ShowClientPage.cshtml" />
-    <Content Include="Views\Manager\AddCourse.cshtml" />
     <Content Include="Views\Client\MessagesPage.cshtml" />
     <Content Include="Views\Client\NewMessage.cshtml" />
     <Content Include="Views\Developer\MessagesPage.cshtml" />
@@ -223,6 +225,7 @@
     <Content Include="Views\Developer\CreateForm.cshtml" />
     <Content Include="Views\Developer\ChooseForm.cshtml" />
     <Content Include="Views\Developer\EditForm.cshtml" />
+    <Content Include="Views\Manager\ShowGroups.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
