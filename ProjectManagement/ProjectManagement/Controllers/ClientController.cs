@@ -21,6 +21,7 @@ namespace ProjectManagement.Controllers
                 return true;
         }
 
+
         public ActionResult ShowClientPage()
         {
             if (!Authorize())
