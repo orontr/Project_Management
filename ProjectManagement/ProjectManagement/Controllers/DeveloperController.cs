@@ -4,6 +4,7 @@ using System.Web.Mvc;
 using ProjectManagement.DAL;
 using ProjectManagement.Models;
 using ProjectManagement.ViewModel;
+using Rotativa;
 
 namespace ProjectManagement.Controllers
 {
@@ -161,10 +162,11 @@ namespace ProjectManagement.Controllers
             return report;
         }
 
-        public ActionResult PrintPartialViewToPdf(Form f)
+        public ActionResult PrintPartialViewToPdf(string name)
         {
 
-            var report = new PartialViewAsPdf("~/Views/Shared/DetailCustomer.cshtml", f);
+            Form f = (new FormDal()).Forms.FirstOrDefault(x => x.NameOfProject == name);
+            var report = new PartialViewAsPdf("~/Views/Developer/EditForm.cshtml", f);
             return report;
 
 

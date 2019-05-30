@@ -16,10 +16,13 @@
         </tr>
         @foreach (Form obj in Model.forms)
         {
-            <tr>
-                <td>@obj.NameOfProject </td>
-                <td>
-                    @Html.ActionLink("ערוך מסמך", "EditForm", "Developer", new {name= obj.NameOfProject }, null)
+        <tr>
+            <td>@obj.NameOfProject </td>
+            <td>
+                @Html.ActionLink("ערוך מסמך", "EditForm", "Developer", new { name = obj.NameOfProject }, null)
+            </td>
+            <td>
+                @Html.ActionLink("יצוא מסמךלPDF", "PrintPartialViewToPdf", "Developer", new { name = obj.NameOfProject }, null)
             </td>
         </tr>
         }
