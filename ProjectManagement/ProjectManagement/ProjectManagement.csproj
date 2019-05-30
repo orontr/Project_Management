@@ -228,6 +228,7 @@
     <Content Include="Views\Manager\AddGroup.cshtml" />
     <Content Include="Views\Manager\AddClient.cshtml" />
     <Content Include="Views\Manager\ChooseForm.cshtml" />
+    <Content Include="Views\Developer\PrintPartialViewToPdf.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

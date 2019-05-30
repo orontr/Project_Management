@@ -161,7 +161,7 @@ namespace ProjectManagement.Controllers
         {
 
             Form f = (new FormDal()).Forms.FirstOrDefault(x => x.NameOfProject == name);
-            var report = new PartialViewAsPdf("~/Views/Developer/EditForm.cshtml", f);
+            var report = new PartialViewAsPdf("~/Views/Developer/PrintPartialViewToPdf.cshtml", f);
             return report;
 
 
