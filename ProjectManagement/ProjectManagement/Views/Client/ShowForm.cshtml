@@ -1,0 +1,56 @@
+﻿@model ProjectManagement.Models.Form
+
+@{
+    ViewBag.Title = "ShowForm";
+}
+
+
+
+<h2> @Model.NameOfProject צפה במסמך  </h2>
+
+
+<div id="registerForm">
+    @using (Html.BeginForm("", "", FormMethod.Post, new { Class = "form-group" }))
+    {
+        <div>
+            <label>שם הפרוייקט</label>
+            @Html.TextBoxFor(m => m.NameOfProject, new { Class = "form-control", @Value = Model.NameOfProject, @readonly = "readonly" })
+            <div style="color:red">@Html.ValidationMessageFor(x => x.General)</div>
+        </div>
+
+
+        <div>
+            <label>כללי</label>
+            @Html.TextBoxFor(m => m.General, new { Class = "form-control",@readonly = "readonly" })
+            <div style="color:red">@Html.ValidationMessageFor(x => x.General)</div>
+        </div>
+
+        <div>
+            <label>יעדים ומטרות</label>
+            @Html.TextBoxFor(m => m.Goals, new { Class = "form-control", @readonly = "readonly" })
+            <div style="color:red">@Html.ValidationMessageFor(x => x.Goals)</div>
+        </div>
+
+        <div>
+            <label>בבעיות</label>
+            @Html.TextBoxFor(m => m.Problem, new { Class = "form-control", @readonly = "readonly" })
+            <div style="color:red">@Html.ValidationMessageFor(x => x.Problem)</div>
+        </div>
+
+        <div>
+            <label>יישום</label>
+            @Html.TextBoxFor(m => m.Essence, new { Class = "form-control", @readonly = "readonly" })
+            <div style="color:red">@Html.ValidationMessageFor(x => x.Essence)</div>
+        </div>
+
+        <div>
+            <label>מימוש</label>
+            @Html.TextBoxFor(m => m.Implementaion, new { Class = "form-control", @readonly = "readonly" })
+            <div style="color:red">@Html.ValidationMessageFor(x => x.Implementaion)</div>
+        </div>
+
+ 
+    }
+</div>
+
+

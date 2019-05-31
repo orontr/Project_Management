@@ -232,6 +232,8 @@
     <Content Include="Views\Manager\MessagesPage.cshtml" />
     <Content Include="Views\Manager\ReciverMessages.cshtml" />
     <Content Include="Views\Manager\NewMessage.cshtml" />
+    <Content Include="Views\Client\ChooseForm.cshtml" />
+    <Content Include="Views\Client\ShowForm.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

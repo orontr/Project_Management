@@ -11,15 +11,17 @@
     <br />
     <table class="table table-bordered table-responsive table-hover">
         <tr>
-            <td>  שם פרוייקט  </td>zz
+            <td>  שם פרוייקט  </td>
+            <td>  שם מפתח  </td>
 
         </tr>
         @foreach (Form obj in Model.forms)
         {
         <tr>
             <td>@obj.NameOfProject </td>
+            <td>@obj.NameOfUser </td>
             <td>
-                @Html.ActionLink("ערוך מסמך", "EditForm", "Developer", new { name = obj.NameOfProject }, null)
+                @Html.ActionLink("צפה במסמך", "ShowForm", "Client", new { name = obj.NameOfProject }, null)
             </td>
             <td>
                 @Html.ActionLink("יצוא מסמךלPDF", "PrintPartialViewToPdf", "Developer", new { name = obj.NameOfProject }, null)
