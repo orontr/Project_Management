@@ -229,6 +229,9 @@
     <Content Include="Views\Manager\AddClient.cshtml" />
     <Content Include="Views\Manager\ChooseForm.cshtml" />
     <Content Include="Views\Developer\PrintPartialViewToPdf.cshtml" />
+    <Content Include="Views\Manager\MessagesPage.cshtml" />
+    <Content Include="Views\Manager\ReciverMessages.cshtml" />
+    <Content Include="Views\Manager\NewMessage.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -96,7 +96,7 @@ namespace ProjectManagement.Controllers
         public ActionResult SaveSubmit(Form frm)
         {
             if (Session["CurrentUser"] == null)
-                return RedirectToAction("RedirectByUser");
+                return RedirectToAction("RedirectByUser","Home");
             User usr = (User)Session["CurrentUser"];
             if (ModelState.IsValid)
             {
@@ -150,10 +150,10 @@ namespace ProjectManagement.Controllers
                 f.Implementaion = form.Implementaion;
                 usrDal.SaveChanges();
                 TempData["Update"] = "השינויים בוצעו בהצלחה";
-                return View("ShowDeveloperPage");
+                return RedirectToAction("RedirectByUser", "Home");
             }
             TempData["notUpdate"] = "לא בוצעו שינוים!";
-            return RedirectToAction("ShowDeveloperPage");
+            return RedirectToAction("RedirectByUser", "Home");
 
         }
 

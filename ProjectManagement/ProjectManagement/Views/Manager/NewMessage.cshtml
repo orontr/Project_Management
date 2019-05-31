@@ -1,0 +1,27 @@
+﻿@model ProjectManagement.Models.Message
+@{
+    ViewBag.Title = "NewMessage";
+}
+
+<h2>NewMessage</h2>
+
+<div id="registerForm">
+    @using (Html.BeginForm("SendMessage", "Manager", FormMethod.Post, new { Class = "form-group" }))
+    {
+        <div>
+            <label>למי</label>
+            @Html.TextBoxFor(m => m.Receiver, new { Class = "form-control" })
+            <div style="color:red">@Html.ValidationMessageFor(x => x.Receiver)</div>
+        </div>
+
+        <div>
+            <label>הודעה</label>
+            @Html.TextBoxFor(m => m.TextMessage, new { Class = "form-control" })
+            <div style="color:red">@Html.ValidationMessageFor(x => x.TextMessage)</div>
+        </div>
+        <br />
+        <input class="btn btn-primary" id="SEND" type="submit" value="שלח" />
+    }
+</div>
+<div style="color:red">@TempData["notUser"]</div>
+<div style="color:green">@TempData["OK"]</div>
