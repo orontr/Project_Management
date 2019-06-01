@@ -87,6 +87,7 @@ namespace ProjectManagement.Controllers
 
         public ActionResult AddCourse()
         {
+            // test
             User CurrentUser = (User)Session["CurrentUser"];
             VMYourCourses obj = new VMYourCourses();
             obj.courses = (from c in (new CoursesDal().courses)
