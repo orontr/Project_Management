@@ -1,0 +1,20 @@
+﻿@model ProjectManagement.ViewModel.VMMessages
+
+@using ProjectManagement.Models
+@{
+    ViewBag.Title = "ReciverMessages";
+}
+
+<h2>ReciverMessages</h2>
+
+@{
+    WebGrid message = new WebGrid(Model.Messages, rowsPerPage: 5);
+}
+@message.GetHtml(
+    tableStyle: "table table-bordered table-responsive table-hover ",
+    columns: message.Columns(
+        message.Column("Sender", "שולח"),
+        message.Column("DateAndTime", "תאריך"),
+        message.Column("TextMessage", "הודעה")
+        )
+    )

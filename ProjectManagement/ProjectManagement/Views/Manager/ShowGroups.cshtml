@@ -1,0 +1,37 @@
+﻿@model ProjectManagement.ViewModel.VMGroup
+@using ProjectManagement.Models
+
+@{
+    ViewBag.Title = "ShowGroups";
+}
+
+<h2>ShowGroups</h2>
+
+@using (Html.BeginForm("EditForm", "Developer", FormMethod.Get))
+
+{
+    <span style="color:blue"> המסמכים שלך</span>
+    <br />
+    <table class="table table-bordered table-responsive table-hover">
+        <tr>
+            <td>  מסספר קבוצה  </td>
+            <td>  מפתחים  </td>
+            <td>  לקוח  </td>
+            <td>  מנהל  </td>
+
+        </tr>
+        @foreach (Groups obj in Model.groups)
+        {
+            <tr>
+                <td>@obj.Team </td>
+                <td>
+                    @obj.Developer1,@obj.Developer2,@obj.Developer3
+                </td>
+                <td>@obj.Client </td>
+                <td>@obj.Manager </td>
+            </tr>
+        }
+    </table>
+}
+
+<button id="showGroups" class="btn btn-primary btn-block btn-lg" type="button" onclick="location.href='@Url.Action("AddGroup")'">הוסף קבוצה</button>
